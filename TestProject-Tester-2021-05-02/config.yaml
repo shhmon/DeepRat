@@ -16,19 +16,24 @@ bodyparts:
 - frPaw
 - blPaw
 - brPaw
+- nose
 start: 0
 stop: 1
-numframes2pick: 10
+numframes2pick: 20
 
     # Plotting configuration
 skeleton:
+- - nose
+  - flPaw
+- - nose
+  - frPaw
 - - flPaw
-  - blPaw
-- - blPaw
-  - brPaw
-- - brPaw
   - frPaw
 - - frPaw
+  - brPaw
+- - brPaw
+  - blPaw
+- - blPaw
   - flPaw
 skeleton_color: black
 pcutoff: 0.6
