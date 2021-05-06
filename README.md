@@ -10,13 +10,27 @@ This will install DeepLabCut along with other dependencies inside the environmen
 
 `conda activate DLC-CPU`
 
-To create a project, configure the variables at the top of `local.py` run:
+To create a project, configure the variables at the top of `local.py` and run:
 
 `python local.py`
 
-This will create the project, pause to let you configure `config.yaml` and then proceed to labeling. When labeling is done, push the repo to remote and open the `training.ipynb` file in Google Colab. The cells are pretty self explanatory. Run them, and hopefully the model is trained.
+This will create the project, pause to let you configure `config.yaml` and then proceed to labeling. When labeling is done, push the repo to remote and open the `training.ipynb` file in Google Colab. The cells are pretty self explanatory, starting with cloning the repo to drive and updating the project path in `config.yaml`.
 
-### Indivudial steps of creating a project and training a model
+Once the model is trained, download the repo with the trained model from drive. Now, the project path in `config.yaml` has to be updated again - do it manually. To evaluate the network, open a python interpreter and run (remember to define `config_path` again):
+
+`deeplabcut.evaluate_network(config_path,Shuffles=[1], plotting=True)`
+
+Then, to analyze a new unseen video run:
+
+`deeplabcut.analyze_videos(config_path, ['/path/to/new/video.avi'])`
+
+and finally, to generate a labeled video from the analysis:
+
+`deeplabcut.create_labeled_video(config_path, ['/path/to/new/video.avi'])`
+
+---
+
+## Indivudial steps of creating a project and training a model
 
 **This section describes in a little more detail the process of creating and training a network (without using the `local.py` script)**
 
