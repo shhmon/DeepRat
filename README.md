@@ -14,7 +14,7 @@ To create a project, configure the variables at the top of `local.py` and run:
 
 `python local.py`
 
-This will create the project, pause to let you configure `config.yaml` and then proceed to labeling. When labeling is done, push the repo to remote and open the `training.ipynb` file in Google Colab. The cells are pretty self explanatory, starting with cloning the repo to drive and updating the project path in `config.yaml`.
+This will create the project, pause to let you configure `config.yaml` and then proceed to labeling. When labeling is done, upload the project folder (not the whole repo) to the root folder of your drive and run the `training.ipynb` file in Google Colab. The cells are pretty self explanatory, specify the project name and run it.
 
 Once the model is trained, download the repo with the trained model from drive. Now, the project path in `config.yaml` has to be updated again - do it manually. To evaluate the network, open a python interpreter and run (remember to define `config_path` again):
 

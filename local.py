@@ -2,9 +2,9 @@ import deeplabcut
 
 # Create new project
 
-project_name = "TestProject"
+project_name = "CorridorTracker"
 author = "Tester"
-files = ['/Users/shabo/Desktop/CSProject/DeepRat/example-videos/1a.mp4']
+files = ['/Users/shabo/Desktop/corridor.mp4']
 
 if __name__ == '__main__':
 	config_path = deeplabcut.create_new_project(project_name, author, files)
