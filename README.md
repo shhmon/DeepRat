@@ -2,37 +2,37 @@
 
 ## How to use
 
-In order to use this package, install an Anaconda distribution, go to `conda-environments` and use the `DLC-CPU.yaml` file to create a conda ennvironment:
+### DLC Training
 
-`conda env create -f DLC-CPU.yaml`
+In order to use this package, install an Anaconda distribution, use the `DLC-CPU.yaml` file to create a conda ennvironment:
+
+* `conda env create -f DLC-CPU.yaml`
 
 This will install DeepLabCut along with other dependencies inside the environment. We're using the CPU environment here as the goal is to train the network though a Google colab environment anyway. Activate the conda environment:
 
-`conda activate DLC-CPU`
+* `conda activate DLC-CPU`
 
-To create a project, configure the variables at the top of `local.py` and run:
+To create a project, configure the variables in `config.yaml` and run:
 
-`python local.py`
+* `python dlc-setup.py`
 
-This will create the project, pause to let you configure `config.yaml` and then proceed to labeling. When labeling is done, upload the project folder (not the whole repo) to the root folder of your drive and run the `training.ipynb` file in Google Colab. The cells are pretty self explanatory, specify the project name and run it.
+*Make sure to type 'yes' when asked if frames should be extracted*
 
-Once the model is trained, download the repo with the trained model from drive. Now, the project path in `config.yaml` has to be updated again - do it manually. To evaluate the network, open a python interpreter and run (remember to define `config_path` again):
+This will create the project and then proceed to labeling. When labeling is done, upload the project folder (NOT the whole repo) to the root folder of your drive and run the `training.ipynb` file in Google Colab (via Github). The cells are pretty self explanatory, specify the folder name and run it.
 
-`deeplabcut.evaluate_network(config_path,Shuffles=[1], plotting=True)`
+Once the model is trained, download the trained DLC folder from drive. Now, the project path in `config.yaml` has to be updated again - do it manually. That's it for the DLC network, the section below describes how to proceed with Anipose.
 
-Then, to analyze a new unseen video run:
+### Anipose training
 
-`deeplabcut.analyze_videos(config_path, ['/path/to/new/video.avi'])`
 
-and finally, to generate a labeled video from the analysis:
-
-`deeplabcut.create_labeled_video(config_path, ['/path/to/new/video.avi'])`
 
 ---
 
 ## Indivudial steps of creating a project and training a model
 
-**This section describes in a little more detail the process of creating and training a network (without using the `local.py` script)**
+*Read with caution, this section might be outdated*
+
+**This section describes in a little more detail the process of creating and training a network (without using the `dlc-setup.py` script)**
 
 To create a model, open `ipython` or `pythonw` (normally `ipython` is used, but GUI bug on mac can be solved with `conda install python.app` and using `pythonw` instead) and run the following lines:
 
@@ -58,5 +58,14 @@ Now it is time to train the network. The training function takes many optional p
 
 `deeplabcut.train_network(config_path, maxiters=500000)`
 
-Here, the iteration number is set to 500 000 as the network theoretically should converge in around 200k-400k iterations.
+Here, the iteration number is set to 500 000 as the network theoretically should converge in around 200k-400k iterations. The network can be evaluated post-training by running:
 
+`deeplabcut.evaluate_network(config_path,Shuffles=[1], plotting=True)`
+
+And used to analyse an unseen video with:
+
+`deeplabcut.analyze_videos(config_path, ['/path/to/new/video.avi'])`
+
+and finally, to generate a labeled video from the analysis:
+
+`deeplabcut.create_labeled_video(config_path, ['/path/to/new/video.avi'])`

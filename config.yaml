@@ -1,0 +1,12 @@
+# DeepRat configuration file
+
+project_name: TestProject
+author: Tester
+train_videos:
+  - /Users/shabo/Desktop/no-dysk.mp4
+dlc_config:
+  bodyparts:
+  - test
+  - test2
+  skeleton: null
+  numframes2pick: 20
