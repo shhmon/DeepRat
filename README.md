@@ -2,29 +2,37 @@
 
 ## How to use
 
+All configuration for this pipeline should be done through `config.yaml`. The upper part consists of configuration values for DLC whereas the lower part concerns Anipose. The current values for Anipose are the default values gathered from a number of sources and will not work properly without further reading and adaptation.
+
 ### DLC Training
 
-In order to use this package, install an Anaconda distribution, use the `DLC-CPU.yaml` file to create a conda ennvironment:
+In order to use this pipeline, install an Anaconda distribution and use the `DLC-CPU.yaml` file to create a conda ennvironment:
 
 * `conda env create -f DLC-CPU.yaml`
 
-This will install DeepLabCut along with other dependencies inside the environment. We're using the CPU environment here as the goal is to train the network though a Google colab environment anyway. Activate the conda environment:
+This will install DeepLabCut and Anipose along with other dependencies inside the environment. We're using the CPU environment here as the goal is to train the network though a Google colab environment anyway. Activate the conda environment:
 
 * `conda activate DLC-CPU`
 
-To create a project, configure the variables in `config.yaml` and run:
+To create a DLC project, configure the DLC-related variables in `config.yaml` and run:
 
-* `python dlc-setup.py`
+* `python dlc_setup.py`
 
 *Make sure to type 'yes' when asked if frames should be extracted*
 
 This will create the project and then proceed to labeling. When labeling is done, upload the project folder (NOT the whole repo) to the root folder of your drive and run the `training.ipynb` file in Google Colab (via Github). The cells are pretty self explanatory, specify the folder name and run it.
 
-Once the model is trained, download the trained DLC folder from drive. If you ran the last cell, the project path was set back to the inital (local) path. That's it for the DLC network, the section below describes how to proceed with Anipose.
+Once the model is trained, download the trained DLC folder from drive. If you ran the last cell, the project path was set back to the inital (local) path so either put it back in the same place or update the config manually. That's it for the DLC network, the section below describes how to proceed with Anipose.
 
 ### Anipose training
 
+To create an Anipose project, run:
 
+* `python anipose_setup.py /path/to/trained/dlc-model`
+
+This will create the project stucture described in the Anipose documentation along with a config file.
+
+*Continue Here...*
 
 ---
 
@@ -32,7 +40,7 @@ Once the model is trained, download the trained DLC folder from drive. If you ra
 
 *Read with caution, this section might be outdated*
 
-**This section describes in a little more detail the process of creating and training a network (without using the `dlc-setup.py` script)**
+**This section describes in a little more detail the process of creating and training a network (without using the `dlc_setup.py` script)**
 
 To create a model, open `ipython` or `pythonw` (normally `ipython` is used, but GUI bug on mac can be solved with `conda install python.app` and using `pythonw` instead) and run the following lines:
 
