@@ -20,7 +20,7 @@ To create a project, configure the variables in `config.yaml` and run:
 
 This will create the project and then proceed to labeling. When labeling is done, upload the project folder (NOT the whole repo) to the root folder of your drive and run the `training.ipynb` file in Google Colab (via Github). The cells are pretty self explanatory, specify the folder name and run it.
 
-Once the model is trained, download the trained DLC folder from drive. Now, the project path in `config.yaml` has to be updated again - do it manually. That's it for the DLC network, the section below describes how to proceed with Anipose.
+Once the model is trained, download the trained DLC folder from drive. If you ran the last cell, the project path was set back to the inital (local) path. That's it for the DLC network, the section below describes how to proceed with Anipose.
 
 ### Anipose training
 
