@@ -1,51 +1,53 @@
-# DeepRat configuration file
+# -- DeepRat configuration file --
 
-project_name: &name TestProject
+# Shared properties
+project_name: TestProject
 author: Tester
-train_videos:
-  - /Users/shabo/Desktop/no-dysk.mp4
-
-# Properties injected to the DLC config.yaml
-dlc_config:
-  # Bodyparts to be tracked
-  bodyparts:
-  - test
-  - test2
-  # Skeleton configuration
-  skeleton: null
-  # Number of frames to label
-  numframes2pick: 20
+training_videos: [
+  "/Users/shabo/Desktop/videos-raw/hand-cam1.MOV",
+  "/Users/shabo/Desktop/videos-raw/hand-cam2.MOV",
+  "/Users/shabo/Desktop/videos-raw/hand-cam3.MOV",
+]
+calibration_videos: [
+  "/Users/shabo/Desktop/calibration/charuco-cam1.MOV",
+  "/Users/shabo/Desktop/calibration/charuco-cam2.MOV",
+  "/Users/shabo/Desktop/calibration/charuco-cam3.MOV"
+]
+scheme: [
+  ["thuB", "thuM", "thuT"],
+  ["indB", "indM", "indT"],
+  ["cent", "thuB"],
+  ["cent", "indB"]
+]
+frames: 10
 
 # Properties of the Anipose config.toml
 anipose_config:
-  project: *name
-  nesting: 1
-  pipeline:
-    videos_raw: videos-raw
-  # labeling scheme...specify lines that you want to draw for visualizing labels in videos
-  labeling:
-    scheme:
-      - - head
-        - thorax
-        - abdomen
-      - - thorax
-        - leg-1
+  # Filter for 2D outliers, replaced by intepolating
   filter:
     enabled: true
     medfilt: 13
     offset_threshold: 25
     score_threshold: 0.8
+    # Enables cubic spline interpolation as opposed to linear
     spline: true
   triangulation:
     cam_regex: 'cam([0-9])'
   calibration:
     board_type: charuco
     board_size:
-      - 6
-      - 6
+      - 10
+      - 7
+    # number of bits in the markers, if aruco/charuco
     board_marker_bits: 4
+    # number of markers in dictionary, if aruco/charuco
     board_marker_dict_number: 50
-    board_marker_length: 3
-    board_square_side_length: 4
+    # length of marker side
+    board_marker_length: 18.75 # mm
+    # If charuco or checkerboard, square side length
+    board_square_side_length: 25 # mm
+    # If aruco, length of marker separation
+    board_marker_separation_length: 1 # mm
+    fisheye: true
   manual_verification:
     manually_verify: false

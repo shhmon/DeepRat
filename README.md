@@ -14,25 +14,24 @@ This will install DeepLabCut and Anipose along with other dependencies inside th
 
 * `conda activate DLC-CPU`
 
-To create a DLC project, configure the DLC-related variables in `config.yaml` and run:
+To create a DLC project and a linked Anipose project, configure the variables in `config.yaml` and run:
 
-* `python dlc_setup.py`
+* `python main.py`
 
-*Make sure to type 'yes' when asked if frames should be extracted*
+This will create a DLC project, extract frames and then proceed to manual labeling. When labeling is done, an Anipose project structure will be created and linked to the DLC project. The folder with the longer name (with a date) will be the DLC project and the shorter will be Anipose.
 
-This will create the project and then proceed to labeling. When labeling is done, upload the project folder (NOT the whole repo) to the root folder of your drive and run the `training.ipynb` file in Google Colab (via Github). The cells are pretty self explanatory, specify the folder name and run it.
+The `training.ipynb` notebook should automatically open in Google Colab. Proceed with uploading the DLC project folder (NOT the whole repo) to the root folder of your drive and run the notebook. The cells are pretty self explanatory, specify the folder and you're good to go.
 
-Once the model is trained, download the trained DLC folder from drive. If you ran the last cell, the project path was set back to the inital (local) path so either put it back in the same place or update the config manually. That's it for the DLC network, the section below describes how to proceed with Anipose.
+Once the model is trained, download the trained DLC folder from drive. Put it back in the same place as before. That's it for the DLC network, the section below describes how to proceed with Anipose.
 
-### Anipose training
+### Anipose usage
 
-To create an Anipose project, run:
+The Anipose project should be created and linked to the DLC project if everything worked correctly. There are three short commands which will suffice for this description. They are composed of multiple commands described in more detail in a section below:
 
-* `python anipose_setup.py /path/to/trained/dlc-model`
+* `anipose run-data` (composed of `analyze, filer, calibrate, triangulate, angles`)
+* `anipose run-viz` (composed of `label-2d, label-3d, label-combined`)
+* `anipose run-all`(composed of `run-data, run-viz`)
 
-This will create the project stucture described in the Anipose documentation along with a config file.
-
-*Continue Here...*
 
 ---
 
@@ -77,3 +76,34 @@ And used to analyse an unseen video with:
 and finally, to generate a labeled video from the analysis:
 
 `deeplabcut.create_labeled_video(config_path, ['/path/to/new/video.avi'])`
+
+## Anipose command details
+
+To analyzes the project and make sure everything is in order:
+
+* `anipose analyze`
+
+If there are errors, there is probably some problems with config paths. If not, the filter command gets rid of any predicted labels that do not come within the threshold:
+
+* `anipose filter`
+
+To generate a labeled video from the data:
+
+* `anipose label-2d-filter`
+
+To calibrate the cameras:
+
+* `anipose calibrate`
+
+To triangulate the points:
+
+* `anipose triangulate`
+
+Now we can label or get raw angle data with:
+
+* `anipose label-3d`
+* `anipose angles`
+
+For viewing, combine the videos to one with:
+
+* `anipose label-combined`
