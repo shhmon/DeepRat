@@ -28,9 +28,9 @@ Once the model is trained, download the trained DLC folder from drive. Put it ba
 
 The Anipose project should be created and linked to the DLC project if everything worked correctly. There are three short commands which will suffice for this description. They are composed of multiple commands described in more detail in a section below:
 
-* `anipose run-data` (composed of `analyze, filer, calibrate, triangulate, angles`)
-* `anipose run-viz` (composed of `label-2d, label-3d, label-combined`)
-* `anipose run-all`(composed of `run-data, run-viz`)
+* `anipose run-data` (composed of `analyze, filer, calibrate, triangulate, angles`)
+* `anipose run-viz` (composed of `label-2d, label-3d, label-combined`)
+* `anipose run-all` (composed of `run-data, run-viz`)
 
 
 ---
