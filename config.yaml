@@ -3,22 +3,19 @@
 # Shared properties
 project_name: TestProject
 author: Tester
-training_videos: [
-  "/Users/shabo/Desktop/videos-raw/hand-cam1.MOV",
-  "/Users/shabo/Desktop/videos-raw/hand-cam2.MOV",
-  "/Users/shabo/Desktop/videos-raw/hand-cam3.MOV",
-]
-calibration_videos: [
-  "/Users/shabo/Desktop/calibration/charuco-cam1.MOV",
-  "/Users/shabo/Desktop/calibration/charuco-cam2.MOV",
-  "/Users/shabo/Desktop/calibration/charuco-cam3.MOV"
-]
-scheme: [
-  ["thuB", "thuM", "thuT"],
-  ["indB", "indM", "indT"],
-  ["cent", "thuB"],
-  ["cent", "indB"]
-]
+training_videos: 
+- /Users/shabo/Desktop/videos-raw/hand-cam1.MOV
+- /Users/shabo/Desktop/videos-raw/hand-cam2.MOV
+- /Users/shabo/Desktop/videos-raw/hand-cam3.MOV
+calibration_videos:
+- /Users/shabo/Desktop/calibration/charuco-cam1.MOV
+- /Users/shabo/Desktop/calibration/charuco-cam2.MOV
+- /Users/shabo/Desktop/calibration/charuco-cam3.MOV
+scheme:
+- [thuB, thuM, thuT],
+- [indB, indM, indT],
+- [cent, thuB],
+- [cent, indB]
 frames: 10
 
 # Properties of the Anipose config.toml

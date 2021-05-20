@@ -11,6 +11,8 @@ TRAINING_URL = "https://colab.research.google.com/github/shhmon/DeepRat/blob/mas
 
 # Flatten and remove duplicates
 flatuniq = lambda li: list(set([i for s in li for i in s]))
+# Get file extension from files
+extension = lambda pa: pa[0].split('.')[-1]
 
 # Read the config.yaml file
 def read_config():
@@ -96,7 +98,8 @@ if __name__ == '__main__':
 		},
 		'pipeline': {
 			'videos_raw': VIDEOS_RAW
-		}
+		},
+		'video_extension': extension(conf['training_videos'])
 	}
 
 	# Create the DLC project

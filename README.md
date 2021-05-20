@@ -28,10 +28,9 @@ Once the model is trained, download the trained DLC folder from drive. Put it ba
 
 The Anipose project should be created and linked to the DLC project if everything worked correctly. There are three short commands which will suffice for this description. They are composed of multiple commands described in more detail in a section below:
 
-* `anipose run-data` (composed of `analyze, filer, calibrate, triangulate, angles`)
+* `anipose run-data` (composed of `analyze, filter, calibrate, triangulate, angles`)
 * `anipose run-viz` (composed of `label-2d, label-3d, label-combined`)
 * `anipose run-all` (composed of `run-data, run-viz`)
-
 
 ---
 
@@ -81,7 +80,7 @@ and finally, to generate a labeled video from the analysis:
 
 To analyzes the project and make sure everything is in order:
 
-* `anipose analyze`
+* `anipose analyze`
 
 If there are errors, there is probably some problems with config paths. If not, the filter command gets rid of any predicted labels that do not come within the threshold:
 
@@ -101,9 +100,9 @@ To triangulate the points:
 
 Now we can label or get raw angle data with:
 
-* `anipose label-3d`
-* `anipose angles`
+* `anipose label-3d`
+* `anipose angles`
 
 For viewing, combine the videos to one with:
 
-* `anipose label-combined`
+* `anipose label-combined`
