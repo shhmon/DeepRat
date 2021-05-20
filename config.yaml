@@ -11,6 +11,8 @@ calibration_videos:
 - /Users/shabo/Desktop/calibration/charuco-cam1.MOV
 - /Users/shabo/Desktop/calibration/charuco-cam2.MOV
 - /Users/shabo/Desktop/calibration/charuco-cam3.MOV
+# This is a scheme which specifies both WHICH bodyparts should be tracked and HOW they should be plotted.
+# It's used for the skeleton/bodyparts propery of DLC and the scheme property of the Anipose.
 scheme:
 - [thuB, thuM, thuT],
 - [indB, indM, indT],
