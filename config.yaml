@@ -12,9 +12,9 @@ calibration_videos:
 - /Users/shabo/Desktop/calibration/charuco-cam2.MOV
 - /Users/shabo/Desktop/calibration/charuco-cam3.MOV
 scheme:
-- [thuB, thuM, thuT],
-- [indB, indM, indT],
-- [cent, thuB],
+- [thuB, thuM, thuT]
+- [indB, indM, indT]
+- [cent, thuB]
 - [cent, indB]
 frames: 10
 
