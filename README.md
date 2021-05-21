@@ -2,7 +2,7 @@
 
 ## How to use
 
-All configuration for this pipeline should be done through `config.yaml`. The upper part consists of configuration values for DLC whereas the lower part concerns Anipose. The current values for Anipose are the default values gathered from a number of sources and will not work properly without further reading and adaptation.
+All configuration for this pipeline should be done through `config.yaml`. It's a mix of DLC, Anipose and shared properties. The current values for Anipose are the default values gathered from a number of sources and will not work properly without further reading and adaptation.
 
 ### DLC Training
 
