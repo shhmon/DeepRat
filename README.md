@@ -32,6 +32,8 @@ The Anipose project should be created and linked to the DLC project if everythin
 * `anipose run-viz` (composed of `label-2d, label-3d, label-combined`)
 * `anipose run-all` (composed of `run-data, run-viz`)
 
+Running `analyze` might take a while, so use the `anipose.ipynb` notebook on colab to do it x20 faster than locally.
+
 ---
 
 ## Indivudial steps of creating a project and training a model
