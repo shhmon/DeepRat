@@ -2,17 +2,17 @@
 
 ## How to use
 
-All configuration for this pipeline should be done through `config.yaml`. It's a mix of DLC, Anipose and shared properties. The current values for Anipose are the default values gathered from a number of sources and will not work properly without further reading and adaptation.
+All configuration for this pipeline should be done through `config.yaml`. It's a mix of DLC, Anipose and shared properties.
 
 ### DLC Training
 
-In order to use this pipeline, install an Anaconda distribution and use the `DLC-CPU.yaml` file to create a conda ennvironment:
+In order to use this pipeline, install an Anaconda distribution and use the `conda.yaml` file to create a conda ennvironment:
 
-* `conda env create -f DLC-CPU.yaml`
+* `conda env create -f conda.yaml`
 
-This will install DeepLabCut and Anipose along with other dependencies inside the environment. We're using the CPU environment here as the goal is to train the network though a Google colab environment anyway. Activate the conda environment:
+This will install DeepLabCut and Anipose along with other dependencies inside the environment. We're using the CPU environment here as the goal is to train the network though a Google colab environment. Activate the conda environment:
 
-* `conda activate DLC-CPU`
+* `conda activate DeepRat`
 
 To create a DLC project and a linked Anipose project, configure the variables in `config.yaml` and run:
 
@@ -26,21 +26,32 @@ Once the model is trained, download the trained DLC folder from drive. Put it ba
 
 ### Anipose usage
 
-The Anipose project should be created and linked to the DLC project if everything worked correctly. There are three short commands which will suffice for this description. They are composed of multiple commands described in more detail in a section below:
+The Anipose project should be created and linked to the DLC project if everything worked correctly. 
+Start by analyzing the videos in the Anipose project with the DLC model:
 
-* `anipose run-data` (composed of `analyze, filter, calibrate, triangulate, angles`)
-* `anipose run-viz` (composed of `label-2d, label-3d, label-combined`)
-* `anipose run-all` (composed of `run-data, run-viz`)
+* `anipose analyze`
 
-Running `analyze` might take a while, so use the `anipose.ipynb` notebook on colab to do it x20 faster than locally.
+This will create a `pose-2d` folder containing pose estimation for the videos. Next, we calibrate to obtain the camera parameters from the calibration videos:
+
+* `anipose calibrate`
+
+Now we can triangulate the points in the video with:
+
+* `anipose triangulate`
+
+And generate a 3D model with:
+
+* `anipose label-3d`
+
+**Note:** Running `analyze` might take a while, so you can use the `anipose.ipynb` notebook on colab to do it around x20 faster than locally. The paths in Anipose's `config.toml` and DLC's `config.yaml` have to be updated manually if in a colab environment.
 
 ---
 
-## Indivudial steps of creating a project and training a model
+## More detailed DLC training description
 
 *Read with caution, this section might be outdated*
 
-**This section describes in a little more detail the process of creating and training a network (without using the `dlc_setup.py` script)**
+**This section describes in a little more detail the process of creating and training a network (without using the `main.py` script)**
 
 To create a model, open `ipython` or `pythonw` (normally `ipython` is used, but GUI bug on mac can be solved with `conda install python.app` and using `pythonw` instead) and run the following lines:
 
@@ -50,7 +61,7 @@ To create a model, open `ipython` or `pythonw` (normally `ipython` is used, but 
 
 This creates a new project directory `ProjectName-Author-Date`  which contains a `config.yaml` file. In this file, details such as body parts and skeleton configuration should be specified. According to the papers, the identification works better with more general models. In other words, models with many body parts tend to work better than the more specific ones (e.g a single body part). Another important point variable is `numframes2pick`, which specifies the number of labeled frames to use (default = 20). More info about the config file can be found [here](https://github.com/DeepLabCut/DeepLabCut/blob/master/docs/functionDetails.md#b-configure-the-project-). The `config_path` variable now specifies the location of the config file. Run the following:
 
-`deeplabcut.extract_frames(config_path, 'automatic', 'kmeans')`
+`deeplabcut.extract_frames(config_path, 'automatic', 'kmeans', userfeedback=False)`
 
 `deeplabcut.label_frames(config_path)`
 
@@ -77,34 +88,3 @@ And used to analyse an unseen video with:
 and finally, to generate a labeled video from the analysis:
 
 `deeplabcut.create_labeled_video(config_path, ['/path/to/new/video.avi'])`
-
-## Anipose command details
-
-To analyzes the project and make sure everything is in order:
-
-* `anipose analyze`
-
-If there are errors, there is probably some problems with config paths. If not, the filter command gets rid of any predicted labels that do not come within the threshold:
-
-* `anipose filter`
-
-To generate a labeled video from the data:
-
-* `anipose label-2d-filter`
-
-To calibrate the cameras:
-
-* `anipose calibrate`
-
-To triangulate the points:
-
-* `anipose triangulate`
-
-Now we can label or get raw angle data with:
-
-* `anipose label-3d`
-* `anipose angles`
-
-For viewing, combine the videos to one with:
-
-* `anipose label-combined`

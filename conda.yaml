@@ -1,0 +1,19 @@
+name: DeepRat
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - pip
+  - jupyter
+  - nb_conda
+  - mayavi
+  - ffmpeg
+  - pip:
+    - tensorflow==1.15.5
+    - deeplabcut[gui]
+    - wxPython
+    - anipose
+    - pyyaml
+    - toml
+    - numba==0.50.1 #fix due to Anipose bug
